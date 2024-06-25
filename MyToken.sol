@@ -1,12 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-// Functionality
-// Only contract owner should be able to mint tokens
-// Any user can transfer tokens
-// Any user can burn tokens
-
-
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
 
 
@@ -21,6 +15,13 @@ modifier OnlyOwnerBro {
         _;
 }
 
+// Please explicitly add the transfer function in your code
+
+
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
+        _transfer(_msgSender(), recipient, amount);
+        return true;
+    }
     function mint(address to, uint256 amount) public OnlyOwnerBro {
         _mint(to, amount);
     }
